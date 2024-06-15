@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0; /* Lägg till bakgrundsfärg */
+}
+
+.puzzle-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.puzzle-board {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.puzzle-row {
+    display: flex;
+}
+
+.puzzle-tile {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lightblue;
+    margin: 2px;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.puzzle-tile.empty {
+    background-color: lightgray;
+    cursor: default;
+}
+
+.shuffle-button {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.win-message {
+    margin-top: 20px;
+    font-size: 24px;
+    color: green;
+}
+
+/* Responsiv design */
+@media (max-width: 768px) {
+    body {
+        height: auto;
+        padding: 20px;
+    }
+
+    .puzzle-tile {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    .shuffle-button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .win-message {
+        font-size: 18px;
+    }
+}

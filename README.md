@@ -1,6 +1,5 @@
 # n-puzzle
 
-n-puzzle koduppgift.
-För att köra, använd:
-npm install
-npm run dev
+n-puzzle koduppgift. För att köra:
+`$ npm install`
+`$ npm run dev`

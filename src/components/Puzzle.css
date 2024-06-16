@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700&display=swap');
 
 body {
     font-family: 'Open Sans', sans-serif;
@@ -8,24 +8,26 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f0f0f0; /* Lägg till bakgrundsfärg */
+    background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+    background-attachment: fixed;
 }
-
 .puzzle-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    border-radius: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    width: auto;
+    max-width: 95%;
 }
 
 .puzzle-board {
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .puzzle-row {
@@ -33,58 +35,98 @@ body {
 }
 
 .puzzle-tile {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     display: flex;
-    align-items: center;
     justify-content: center;
-    background-color: lightblue;
-    margin: 2px;
-    font-size: 24px;
+    align-items: center;
+    background-color: #3194d0;
+    color: #ffffff;
+    margin: 5px;
+    font-size: 28px;
+    font-weight: 500;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 12px;
+    transition: background-color 0.5s, transform 0.4s;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15); /* Mindre box-shadow som inte överlappar */
+}
+
+.puzzle-tile:hover:not(.empty) {
+    background-color: #1e88e5;
+    transform: scale(1.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Mindre box-shadow också här */
 }
 
 .puzzle-tile.empty {
-    background-color: lightgray;
+    background-color: #e1e1e1;
     cursor: default;
+    box-shadow: none;
 }
 
-.shuffle-button {
-    background-color: black;
-    color: white;
-    padding: 10px 20px;
+.shuffle-button,
+.play-again-button {
+    background-color: #e91e63;
+    color: #ffffff;
+    padding: 20px 40px;
+    margin-top: 30px;
+    font-size: 20px;
+    font-weight: 700;
     border: none;
-    font-size: 16px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 15px;
+    transition: background-color 0.5s, transform 0.4s, box-shadow 0.4s;
+}
+
+.shuffle-button:hover,
+.play-again-button:hover {
+    background-color: #c2185b;
+    transform: scale(1.1);
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.25);
 }
 
 .win-message {
-    margin-top: 20px;
+    margin-top: 30px;
     font-size: 24px;
-    color: green;
+    color: #43a047;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px 25px;
+    border-radius: 15px;
+    background-color: #e8f5e9;
+    border: 2px solid #43a047;
+    animation: fadeIn 0.5s ease-in-out;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Ger utrymme mellan texten och knappen */
+}
+
+.show-win-message {
+    opacity: 1;
 }
 
 /* Responsiv design */
 @media (max-width: 768px) {
-    body {
-        height: auto;
+    .puzzle-container {
         padding: 20px;
     }
 
     .puzzle-tile {
         width: 40px;
         height: 40px;
-        font-size: 18px;
+        font-size: 15px;
+        margin: 3px;
     }
 
-    .shuffle-button {
-        padding: 8px 16px;
+    .shuffle-button,
+    .play-again-button {
+        padding: 12px 12px;
         font-size: 14px;
     }
 
     .win-message {
         font-size: 18px;
+        padding: 10px 20px;
     }
 }

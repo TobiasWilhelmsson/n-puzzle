@@ -10,7 +10,7 @@ const initialState = {
 // Generera pusslet med en array av nummer och en tom ruta
 const generatePuzzle = (rows: number, cols: number) => {
     const numbers = Array.from({ length: rows * cols }, (_, i) => i + 1)
-    // Sätt sista elemntet till 0 för att representera tom ruta
+    // Sätt sista elementet till 0 för att representera tom ruta
     numbers[numbers.length - 1] = 0
     // Slumpa ordningen
     numbers.sort(() => Math.random() - 0.5)
@@ -82,7 +82,7 @@ const Puzzle: React.FC = () => {
                             newPuzzle[(i - 1) * cols + emptyCol]
                     }
                 }
-                newPuzzle[tileRow * cols + tileCol] = 0 //  Nytt index för tomrummet
+                newPuzzle[tileRow * cols + tileCol] = 0 // Nytt index för tomrummet
                 setPuzzle(newPuzzle)
                 setEmptyIndex(tileRow * cols + tileCol)
             }
@@ -107,35 +107,49 @@ const Puzzle: React.FC = () => {
 
     return (
         <div className="puzzle-container">
-            <div className="puzzle-board">
-                {Array.from({ length: rows }, (_, rowIndex) => (
-                    <div className="puzzle-row" key={rowIndex}>
-                        {/* Skapa  array av längden rows och mappa över den för att skapa varje rad */}
-                        {puzzle
-                            .slice(rowIndex * cols, rowIndex * cols + cols)
-                            .map((val, colIndex) => (
-                                // Ta en slice av `puzzle` arrayen för att få alla kolumner för aktuella raden
-                                <div
-                                    key={colIndex}
-                                    className={`puzzle-tile ${val === 0 ? 'empty' : ''}`}
-                                    /* Condition på värdet sätts klassen till tom för 0 */
-                                    onClick={() =>
-                                        val !== 0 && moveTile(rowIndex * cols + colIndex)
-                                    }
-                                    /* onClick flyttar brickan */
-                                >
-                                    {val !== 0 ? val : null}
-                                    {/* Visa numret om det inte är tomrum */}
-                                </div>
-                            ))}
-                    </div>
-                ))}
-            </div>
-            <button onClick={shufflePuzzle} className="shuffle-button">
-                Slumpa
-            </button>
-            {didWin && <div className="win-message">Grattis! Du löste pusslet!</div>}
-            {/* Visa vinstmeddelande vid vinst */}
+            {!didWin && (
+                <div className="puzzle-board">
+                    {Array.from({ length: rows }, (_, rowIndex) => (
+                        <div className="puzzle-row" key={rowIndex}>
+                            {/* Skapa array av längden rows och mappa över den för att skapa varje rad */}
+                            {puzzle
+                                .slice(rowIndex * cols, rowIndex * cols + cols)
+                                .map((val, colIndex) => (
+                                    // Ta en slice av `puzzle` arrayen för att få alla kolumner för aktuella raden
+                                    <div
+                                        key={colIndex}
+                                        className={`puzzle-tile ${
+                                            val === 0 ? 'empty' : ''
+                                        }`}
+                                        /* Condition på värdet sätts klassen till tom för 0 */
+                                        onClick={() =>
+                                            val !== 0 &&
+                                            moveTile(rowIndex * cols + colIndex)
+                                        }
+                                        /* onClick flyttar brickan */
+                                    >
+                                        {val !== 0 ? val : null}
+                                        {/* Visa numret om det inte är tomrum */}
+                                    </div>
+                                ))}
+                        </div>
+                    ))}
+                </div>
+            )}
+            {!didWin && (
+                <button onClick={shufflePuzzle} className="shuffle-button">
+                    Slumpa
+                </button>
+            )}
+
+            {didWin && (
+                <div className="win-message show-win-message">
+                    Grattis! Du löste pusslet!
+                    <button onClick={shufflePuzzle} className="play-again-button">
+                        Spela igen
+                    </button>
+                </div>
+            )}
         </div>
     )
 }
